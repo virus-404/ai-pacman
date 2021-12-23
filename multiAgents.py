@@ -232,15 +232,16 @@ class AlphaBetaAgent(MultiAgentSearchAgent):
                         root=True)
 
     def max_value(self, gameState: GameState, agent, depth, alpha=float("-inf"), beta=float("+inf"), root=False):
+        acc = []
         if self.terminalTest(gameState, depth):
-            return [] if root else self.evaluationFunction(gameState)
+            return acc if root else self.evaluationFunction(gameState)
 
         v = float("-inf")
         for a in gameState.getLegalActions(agent):
             v = max(v, self.min_value(gameState=gameState.getNextState(agent, a),
                                       agent=1, depth=depth, alpha=alpha, beta=beta))
             if v >= beta:
-                return  acc if root else v
+                return  a if root else v
             if alpha < v:
                 alpha = v
                 acc = a
@@ -255,11 +256,11 @@ class AlphaBetaAgent(MultiAgentSearchAgent):
             succ = gameState.getNextState(agent, a)
             if agent == gameState.getNumAgents() - 1:
                 v = min(v, self.max_value(succ, agent=0, depth=depth - 1, alpha=alpha, beta=beta))
-                if v <= alpha:
-                    return v
-                beta = min(beta, v)
             else:
                 v = min(v, self.min_value(succ, agent=agent + 1, depth=depth, alpha=alpha, beta=beta)) 
+            if v < alpha:
+                return v
+            beta = min(beta, v)
         return v
 
 class ExpectimaxAgent(MultiAgentSearchAgent):
