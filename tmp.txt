@@ -1,0 +1,331 @@
+Agent:  1  depth:  2 value:  None action:  Right
+----------------------------------------------------------
+ >> Agent:  1  depth:  2 value:  1.0 action:  Right
+Agent:  0  depth:  2 value:  -inf action:  []
+Agent:  1  depth:  2 value:  None action:  Left
+Agent:  1  depth:  2 value:  1.0 action:  Right
+----------------------------------------------------------
+True and 1.0 | -inf
+update
+ >> Agent:  1  depth:  2 value:  1.0 action:  Right
+Agent:  0  depth:  2 value:  1.0 action:  Right
+Agent:  1  depth:  2 value:  None action:  Left
+----------------------------------------------------------
+ >> Agent:  1  depth:  2 value:  0.0 action:  Left
+Agent:  0  depth:  2 value:  1.0 action:  Right
+Agent:  1  depth:  2 value:  0.0 action:  Left
+----------------------------------------------------------
+True and 0.0 | 1.0
+ >> Agent:  1  depth:  2 value:  0.0 action:  Left
+Agent:  0  depth:  2 value:  1.0 action:  Right
+----------------------------------------------------------
+*** PASS: test_cases/q2/0-eval-function-win-states-2.test
+ >> Agent:  0  depth:  2 value:  -inf action:  []
+Agent:  0  depth:  2 value:  -inf action:  []
+Agent:  1  depth:  2 value:  None action:  Left
+Agent:  1  depth:  2 value:  None action:  Center
+Agent:  1  depth:  2 value:  None action:  Right
+----------------------------------------------------------
+ >> Agent:  1  depth:  2 value:  inf action:  Right
+Agent:  0  depth:  2 value:  -inf action:  []
+Agent:  1  depth:  2 value:  None action:  Left
+Agent:  1  depth:  2 value:  None action:  Center
+Agent:  1  depth:  2 value:  inf action:  Right
+Agent:  0  depth:  1 value:  None action:  Left
+Agent:  0  depth:  1 value:  None action:  Center
+Agent:  0  depth:  1 value:  None action:  Right
+----------------------------------------------------------
+ >> Agent:  0  depth:  1 value:  11.0 action:  Right
+Agent:  0  depth:  2 value:  -inf action:  []
+Agent:  1  depth:  2 value:  None action:  Left
+Agent:  1  depth:  2 value:  None action:  Center
+Agent:  1  depth:  2 value:  inf action:  Right
+Agent:  0  depth:  1 value:  None action:  Left
+Agent:  0  depth:  1 value:  None action:  Center
+Agent:  0  depth:  1 value:  11.0 action:  Right
+----------------------------------------------------------
+False and 11.0 | inf
+update
+ >> Agent:  0  depth:  1 value:  11.0 action:  Right
+Agent:  0  depth:  2 value:  -inf action:  []
+Agent:  1  depth:  2 value:  None action:  Left
+Agent:  1  depth:  2 value:  None action:  Center
+Agent:  1  depth:  2 value:  11.0 action:  Right
+Agent:  0  depth:  1 value:  None action:  Left
+Agent:  0  depth:  1 value:  None action:  Center
+----------------------------------------------------------
+ >> Agent:  0  depth:  1 value:  1.0 action:  Center
+Agent:  0  depth:  2 value:  -inf action:  []
+Agent:  1  depth:  2 value:  None action:  Left
+Agent:  1  depth:  2 value:  None action:  Center
+Agent:  1  depth:  2 value:  11.0 action:  Right
+Agent:  0  depth:  1 value:  None action:  Left
+Agent:  0  depth:  1 value:  1.0 action:  Center
+----------------------------------------------------------
+False and 1.0 | 11.0
+update
+ >> Agent:  0  depth:  1 value:  1.0 action:  Center
+Agent:  0  depth:  2 value:  -inf action:  []
+Agent:  1  depth:  2 value:  None action:  Left
+Agent:  1  depth:  2 value:  None action:  Center
+Agent:  1  depth:  2 value:  1.0 action:  Center
+Agent:  0  depth:  1 value:  None action:  Left
+----------------------------------------------------------
+ >> Agent:  0  depth:  1 value:  14.0 action:  Left
+Agent:  0  depth:  2 value:  -inf action:  []
+Agent:  1  depth:  2 value:  None action:  Left
+Agent:  1  depth:  2 value:  None action:  Center
+Agent:  1  depth:  2 value:  1.0 action:  Center
+Agent:  0  depth:  1 value:  14.0 action:  Left
+----------------------------------------------------------
+False and 14.0 | 1.0
+ >> Agent:  0  depth:  1 value:  14.0 action:  Left
+Agent:  0  depth:  2 value:  -inf action:  []
+Agent:  1  depth:  2 value:  None action:  Left
+Agent:  1  depth:  2 value:  None action:  Center
+Agent:  1  depth:  2 value:  1.0 action:  Center
+----------------------------------------------------------
+True and 1.0 | -inf
+update
+ >> Agent:  1  depth:  2 value:  1.0 action:  Center
+Agent:  0  depth:  2 value:  1.0 action:  Center
+Agent:  1  depth:  2 value:  None action:  Left
+Agent:  1  depth:  2 value:  None action:  Center
+----------------------------------------------------------
+ >> Agent:  1  depth:  2 value:  inf action:  Center
+Agent:  0  depth:  2 value:  1.0 action:  Center
+Agent:  1  depth:  2 value:  None action:  Left
+Agent:  1  depth:  2 value:  inf action:  Center
+Agent:  0  depth:  1 value:  None action:  Left
+Agent:  0  depth:  1 value:  None action:  Center
+Agent:  0  depth:  1 value:  None action:  Right
+----------------------------------------------------------
+ >> Agent:  0  depth:  1 value:  6.0 action:  Right
+Agent:  0  depth:  2 value:  1.0 action:  Center
+Agent:  1  depth:  2 value:  None action:  Left
+Agent:  1  depth:  2 value:  inf action:  Center
+Agent:  0  depth:  1 value:  None action:  Left
+Agent:  0  depth:  1 value:  None action:  Center
+Agent:  0  depth:  1 value:  6.0 action:  Right
+----------------------------------------------------------
+False and 6.0 | inf
+update
+ >> Agent:  0  depth:  1 value:  6.0 action:  Right
+Agent:  0  depth:  2 value:  1.0 action:  Center
+Agent:  1  depth:  2 value:  None action:  Left
+Agent:  1  depth:  2 value:  6.0 action:  Right
+Agent:  0  depth:  1 value:  None action:  Left
+Agent:  0  depth:  1 value:  None action:  Center
+----------------------------------------------------------
+ >> Agent:  0  depth:  1 value:  4.0 action:  Center
+Agent:  0  depth:  2 value:  1.0 action:  Center
+Agent:  1  depth:  2 value:  None action:  Left
+Agent:  1  depth:  2 value:  6.0 action:  Right
+Agent:  0  depth:  1 value:  None action:  Left
+Agent:  0  depth:  1 value:  4.0 action:  Center
+----------------------------------------------------------
+False and 4.0 | 6.0
+update
+ >> Agent:  0  depth:  1 value:  4.0 action:  Center
+Agent:  0  depth:  2 value:  1.0 action:  Center
+Agent:  1  depth:  2 value:  None action:  Left
+Agent:  1  depth:  2 value:  4.0 action:  Center
+Agent:  0  depth:  1 value:  None action:  Left
+----------------------------------------------------------
+ >> Agent:  0  depth:  1 value:  5.0 action:  Left
+Agent:  0  depth:  2 value:  1.0 action:  Center
+Agent:  1  depth:  2 value:  None action:  Left
+Agent:  1  depth:  2 value:  4.0 action:  Center
+Agent:  0  depth:  1 value:  5.0 action:  Left
+----------------------------------------------------------
+False and 5.0 | 4.0
+ >> Agent:  0  depth:  1 value:  5.0 action:  Left
+Agent:  0  depth:  2 value:  1.0 action:  Center
+Agent:  1  depth:  2 value:  None action:  Left
+Agent:  1  depth:  2 value:  4.0 action:  Center
+----------------------------------------------------------
+True and 4.0 | 1.0
+update
+ >> Agent:  1  depth:  2 value:  4.0 action:  Center
+Agent:  0  depth:  2 value:  4.0 action:  Center
+Agent:  1  depth:  2 value:  None action:  Left
+----------------------------------------------------------
+ >> Agent:  1  depth:  2 value:  inf action:  Left
+Agent:  0  depth:  2 value:  4.0 action:  Center
+Agent:  1  depth:  2 value:  inf action:  Left
+Agent:  0  depth:  1 value:  None action:  Left
+Agent:  0  depth:  1 value:  None action:  Center
+Agent:  0  depth:  1 value:  None action:  Right
+----------------------------------------------------------
+ >> Agent:  0  depth:  1 value:  8.0 action:  Right
+Agent:  0  depth:  2 value:  4.0 action:  Center
+Agent:  1  depth:  2 value:  inf action:  Left
+Agent:  0  depth:  1 value:  None action:  Left
+Agent:  0  depth:  1 value:  None action:  Center
+Agent:  0  depth:  1 value:  8.0 action:  Right
+----------------------------------------------------------
+False and 8.0 | inf
+update
+ >> Agent:  0  depth:  1 value:  8.0 action:  Right
+Agent:  0  depth:  2 value:  4.0 action:  Center
+Agent:  1  depth:  2 value:  8.0 action:  Right
+Agent:  0  depth:  1 value:  None action:  Left
+Agent:  0  depth:  1 value:  None action:  Center
+----------------------------------------------------------
+ >> Agent:  0  depth:  1 value:  12.0 action:  Center
+Agent:  0  depth:  2 value:  4.0 action:  Center
+Agent:  1  depth:  2 value:  8.0 action:  Right
+Agent:  0  depth:  1 value:  None action:  Left
+Agent:  0  depth:  1 value:  12.0 action:  Center
+----------------------------------------------------------
+False and 12.0 | 8.0
+ >> Agent:  0  depth:  1 value:  12.0 action:  Center
+Agent:  0  depth:  2 value:  4.0 action:  Center
+Agent:  1  depth:  2 value:  8.0 action:  Right
+Agent:  0  depth:  1 value:  None action:  Left
+----------------------------------------------------------
+ >> Agent:  0  depth:  1 value:  3.0 action:  Left
+Agent:  0  depth:  2 value:  4.0 action:  Center
+Agent:  1  depth:  2 value:  8.0 action:  Right
+Agent:  0  depth:  1 value:  3.0 action:  Left
+----------------------------------------------------------
+False and 3.0 | 8.0
+update
+ >> Agent:  0  depth:  1 value:  3.0 action:  Left
+Agent:  0  depth:  2 value:  4.0 action:  Center
+Agent:  1  depth:  2 value:  3.0 action:  Left
+----------------------------------------------------------
+True and 3.0 | 4.0
+ >> Agent:  1  depth:  2 value:  3.0 action:  Left
+Agent:  0  depth:  2 value:  4.0 action:  Center
+----------------------------------------------------------
+*** PASS: test_cases/q2/0-lecture-6-tree.test
+ >> Agent:  0  depth:  3 value:  -inf action:  []
+Agent:  0  depth:  3 value:  -inf action:  []
+Agent:  1  depth:  3 value:  None action:  pacLeft
+Agent:  1  depth:  3 value:  None action:  pacRight
+----------------------------------------------------------
+ >> Agent:  1  depth:  3 value:  inf action:  pacRight
+Agent:  0  depth:  3 value:  -inf action:  []
+Agent:  1  depth:  3 value:  None action:  pacLeft
+Agent:  1  depth:  3 value:  inf action:  pacRight
+Agent:  0  depth:  2 value:  None action:  gLeft
+Agent:  0  depth:  2 value:  None action:  gRight
+----------------------------------------------------------
+ >> Agent:  0  depth:  2 value:  -inf action:  gRight
+Agent:  0  depth:  3 value:  -inf action:  []
+Agent:  1  depth:  3 value:  None action:  pacLeft
+Agent:  1  depth:  3 value:  inf action:  pacRight
+Agent:  0  depth:  2 value:  None action:  gLeft
+Agent:  0  depth:  2 value:  -inf action:  gRight
+Agent:  1  depth:  2 value:  None action:  pacLeft
+----------------------------------------------------------
+ >> Agent:  1  depth:  2 value:  1000.0 action:  pacLeft
+Agent:  0  depth:  3 value:  -inf action:  []
+Agent:  1  depth:  3 value:  None action:  pacLeft
+Agent:  1  depth:  3 value:  inf action:  pacRight
+Agent:  0  depth:  2 value:  None action:  gLeft
+Agent:  0  depth:  2 value:  -inf action:  gRight
+Agent:  1  depth:  2 value:  1000.0 action:  pacLeft
+----------------------------------------------------------
+True and 1000.0 | -inf
+update
+ >> Agent:  1  depth:  2 value:  1000.0 action:  pacLeft
+Agent:  0  depth:  3 value:  -inf action:  []
+Agent:  1  depth:  3 value:  None action:  pacLeft
+Agent:  1  depth:  3 value:  inf action:  pacRight
+Agent:  0  depth:  2 value:  None action:  gLeft
+Agent:  0  depth:  2 value:  1000.0 action:  pacLeft
+----------------------------------------------------------
+False and 1000.0 | inf
+update
+ >> Agent:  0  depth:  2 value:  1000.0 action:  pacLeft
+Agent:  0  depth:  3 value:  -inf action:  []
+Agent:  1  depth:  3 value:  None action:  pacLeft
+Agent:  1  depth:  3 value:  1000.0 action:  pacLeft
+Agent:  0  depth:  2 value:  None action:  gLeft
+----------------------------------------------------------
+ >> Agent:  0  depth:  2 value:  2.0 action:  gLeft
+Agent:  0  depth:  3 value:  -inf action:  []
+Agent:  1  depth:  3 value:  None action:  pacLeft
+Agent:  1  depth:  3 value:  1000.0 action:  pacLeft
+Agent:  0  depth:  2 value:  2.0 action:  gLeft
+----------------------------------------------------------
+False and 2.0 | 1000.0
+update
+ >> Agent:  0  depth:  2 value:  2.0 action:  gLeft
+Agent:  0  depth:  3 value:  -inf action:  []
+Agent:  1  depth:  3 value:  None action:  pacLeft
+Agent:  1  depth:  3 value:  2.0 action:  gLeft
+----------------------------------------------------------
+True and 2.0 | -inf
+update
+ >> Agent:  1  depth:  3 value:  2.0 action:  gLeft
+Agent:  0  depth:  3 value:  2.0 action:  gLeft
+Agent:  1  depth:  3 value:  None action:  pacLeft
+----------------------------------------------------------
+ >> Agent:  1  depth:  3 value:  inf action:  pacLeft
+Agent:  0  depth:  3 value:  2.0 action:  gLeft
+Agent:  1  depth:  3 value:  inf action:  pacLeft
+Agent:  0  depth:  2 value:  None action:  gLeft
+Agent:  0  depth:  2 value:  None action:  gRight
+----------------------------------------------------------
+ >> Agent:  0  depth:  2 value:  3.0 action:  gRight
+Agent:  0  depth:  3 value:  2.0 action:  gLeft
+Agent:  1  depth:  3 value:  inf action:  pacLeft
+Agent:  0  depth:  2 value:  None action:  gLeft
+Agent:  0  depth:  2 value:  3.0 action:  gRight
+----------------------------------------------------------
+False and 3.0 | inf
+update
+ >> Agent:  0  depth:  2 value:  3.0 action:  gRight
+Agent:  0  depth:  3 value:  2.0 action:  gLeft
+Agent:  1  depth:  3 value:  3.0 action:  gRight
+Agent:  0  depth:  2 value:  None action:  gLeft
+----------------------------------------------------------
+ >> Agent:  0  depth:  2 value:  4.0 action:  gLeft
+Agent:  0  depth:  3 value:  2.0 action:  gLeft
+Agent:  1  depth:  3 value:  3.0 action:  gRight
+Agent:  0  depth:  2 value:  4.0 action:  gLeft
+----------------------------------------------------------
+False and 4.0 | 3.0
+ >> Agent:  0  depth:  2 value:  4.0 action:  gLeft
+Agent:  0  depth:  3 value:  2.0 action:  gLeft
+Agent:  1  depth:  3 value:  3.0 action:  gRight
+----------------------------------------------------------
+True and 3.0 | 2.0
+update
+ >> Agent:  1  depth:  3 value:  3.0 action:  gRight
+Agent:  0  depth:  3 value:  3.0 action:  gRight
+----------------------------------------------------------
+*** FAIL: test_cases/q2/0-small-tree.test
+***     Incorrect move for depth=3
+***         Student move: gRight
+***         Optimal move: pacLeft
+***     Tree:
+***             root
+***            /    \
+***      minLeft  minRight
+***       / \       /    \
+***      A   B     C   deeper
+***      4   3     2     |
+***                      D
+***                    1000
+ >> Agent:  0  depth:  3 value:  -inf action:  []
+Agent:  0  depth:  3 value:  -inf action:  []
+Agent:  1  depth:  3 value:  None action:  Left
+Agent:  1  depth:  3 value:  None action:  Right
+----------------------------------------------------------
+ >> Agent:  1  depth:  3 value:  inf action:  Right
+Agent:  0  depth:  3 value:  -inf action:  []
+Agent:  1  depth:  3 value:  None action:  Left
+Agent:  1  depth:  3 value:  inf action:  Right
+Agent:  0  depth:  2 value:  None action:  Down
+----------------------------------------------------------
+ >> Agent:  0  depth:  2 value:  -inf action:  Down
+Agent:  0  depth:  3 value:  -inf action:  []
+Agent:  1  depth:  3 value:  None action:  Left
+Agent:  1  depth:  3 value:  inf action:  Right
+Agent:  0  depth:  2 value:  -inf action:  Down
+Agent:  1  depth:  2 value:  None action:  Down
+----------------------------------------------------------

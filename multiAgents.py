@@ -12,8 +12,10 @@
 # Pieter Abbeel (pabbeel@cs.berkeley.edu).
 
 
-from util import manhattanDistance
+from node import Node
+from util import manhattanDistance, Stack
 from game import Actions, Directions, GameStateData
+
 import random
 import util
 
@@ -134,7 +136,7 @@ class MultiAgentSearchAgent(Agent):
     def terminalTest(self, gameState, depth):
         return depth == 0 or gameState.isWin() or gameState.isLose()
 
-class MinimaxAgent(MultiAgentSearchAgent):
+class MiniMaxAgent(MultiAgentSearchAgent):
     """
     Your minimax agent (question 2)
     """
@@ -309,83 +311,7 @@ class ExpectimaxAgent(MultiAgentSearchAgent):
                 v += prob_curr * self.chance(succ, agent=agent + 1, depth=depth)
         return v 
 
-class MinimaxIterativeAgent(MultiAgentSearchAgent):
-    """
-    Your minimax agent (question 2)
-    """
-
-    def getAction(self, gameState: GameState):
-        """
-        Returns the minimax action from the current gameState using self.depth
-        and self.evaluationFunction.
-
-        Here are some method calls that might be useful when implementing minimax.
-
-        gameState.getLegalActions(agentIndex):
-        Returns a list of legal actions for an agent
-        agentIndex=0 means Pacman, ghosts are >= 1
-
-        gameState.getNextState(agentIndex, action):
-        Returns the child game state after an agent takes an action
-
-        gameState.getNumAgents():
-        Returns the total number of agents in the game
-
-        gameState.isWin():
-        Returns whether or not the game state is a winning state
-
-        gameState.isLose():
-        Returns whether or not the game state is a losing state
-        """
-
-        "*** YOUR CODE HERE ***"
-        v = float("-inf")
-        actions = []
-        for a in gameState.getLegalActions(0):
-            u = self.min_value(
-                gameState=gameState.getNextState(0, a),
-                agent=1,
-                depth=self.depth,
-            )
-            if u == v:
-                actions.append(a)
-            elif u >= v:
-                v = u
-                actions = [a]
-
-        #return random.choice(actions)
-        return actions[0]
-
-    def min_value(self, gameState: GameState, agent, depth):
-        if self.terminalTest(gameState, depth):
-            return self.evaluationFunction(gameState)
-
-        v = float("inf")
-        for a in gameState.getLegalActions(agent):
-            succ = gameState.getNextState(agent, a)
-            if agent == gameState.getNumAgents() - 1:
-                v = min(
-                    v, self.max_value(succ, agent=0, depth=depth - 1)
-                )
-            else:
-                v = min(
-                    v, self.min_value(succ, agent=agent + 1, depth=depth)
-                )
-        return v
-
-    def max_value(self, gameState: GameState, agent, depth):
-        if self.terminalTest(gameState, depth):
-            return self.evaluationFunction(gameState)
-
-        v = float("-inf")
-        for a in gameState.getLegalActions(agent):
-            v = max(
-                v, self.min_value(gameState=gameState.getNextState(agent, a),
-                                  agent=1, depth=depth)
-            )
-        return v
-
-class AlphaBetaIterativeAgent(MultiAgentSearchAgent):
+class MinimaxAgent(MultiAgentSearchAgent):
     """
     Your minimax agent with alpha-beta pruning (question 3)
     """
@@ -397,46 +323,49 @@ class AlphaBetaIterativeAgent(MultiAgentSearchAgent):
         "*** YOUR CODE HERE ***"
 
         #return random.choice(actions)
-        return self.max_value(
-            gameState=gameState,
-            agent=0,
-            depth=self.depth,
-            root=True)
+        return self.iter(gameState=gameState,
+                        agent=0,
+                        depth=self.depth)
 
-    def max_value(self, gameState: GameState, agent, depth, alpha=float("-inf"), beta=float("+inf"), root=False):
-        acc = []
-        if self.terminalTest(gameState, depth):
-            return acc if root else self.evaluationFunction(gameState)
-
-        v = float("-inf")
-        for a in gameState.getLegalActions(agent):
-            v = max(v, self.min_value(gameState=gameState.getNextState(agent, a),
-                                      agent=1, depth=depth, alpha=alpha, beta=beta))
-            if v >= beta:
-                return a if root else v
-            if alpha < v:
-                alpha = v
-                acc = a
-        return acc if root else v
-
-    def min_value(self, gameState: GameState, agent, depth, alpha, beta):
-        if self.terminalTest(gameState, depth):
-            return self.evaluationFunction(gameState)
-
-        v = float("inf")
-        for a in gameState.getLegalActions(agent):
-            succ = gameState.getNextState(agent, a)
-            if agent == gameState.getNumAgents() - 1:
-                v = min(v, self.max_value(succ, agent=0,
-                        depth=depth - 1, alpha=alpha, beta=beta))
+    def iter(self, gameState: GameState, agent, depth):
+        stack = Stack()
+        n = Node(parent=None, agent=agent, state=gameState, depth=depth)
+        stack.push(n)
+        
+        while True:
+            x = stack.top()
+            if x.isRoot() and x.value is not None:
+                return x.action
+            if x.value is not None:
+                if x.parent.isPacman() and  x.value > x.parent.value:
+                    x.parent.value = x.value
+                    x.parent.action = x.action
+                elif not x.parent.isPacman() and x.value < x.parent.value:
+                    x.parent.value = x.value
+                stack.pop()    
             else:
-                v = min(v, self.min_value(succ, agent=agent +
-                        1, depth=depth, alpha=alpha, beta=beta))
-            if v < alpha:
-                return v
-            beta = min(beta, v)
-        return v
-
+                if self.terminalTest(x.state, x.depth):
+                    x.value = self.evaluationFunction(x.state)
+                else:
+                    x.value = float("-inf") if x.isPacman() else float("+inf")
+                    for a in x.state.getLegalActions(x.agent):
+                        if x.isPacman():
+                            x_child = Node(parent = x, agent = 1,\
+                                            state = x.state.getNextState(x.agent, a),\
+                                            depth=x.depth)
+                        else:
+                            if x.agent == x.state.getNumAgents() - 1:
+                                x_child = Node(parent = x, agent = 0,\
+                                            state = x.state.getNextState(x.agent, a),\
+                                            depth=x.depth - 1)
+                                
+                            else: 
+                                x_child = Node(parent = x, agent = x.agent + 1,\
+                                            state = x.state.getNextState(x.agent, a),\
+                                            depth=x.depth)
+                        x_child.action = a
+                        stack.push(x_child)
+        
 
 def betterEvaluationFunction(currentGameState):
     """
@@ -445,8 +374,6 @@ def betterEvaluationFunction(currentGameState):
 
     DESCRIPTION: <write something here so we know what you did>
     """
-    
-        
     "*** YOUR CODE HERE ***"
     total_score = -currentGameState.getNumFood()*2
 
