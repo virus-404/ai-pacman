@@ -398,7 +398,7 @@ class AlphaBetaAgentIter(MultiAgentSearchAgent):
                     if  x.value > x.parent.value: #Update my father
                         x.parent.value = x.value
                         x.parent.action = x.action
-                    if x.value < x.alpha:         #Kill my brothers *evil laughs* (kinda sat... send me an @ if you like it)
+                    if x.value < x.alpha:         #Kill my brothers *evil laughs* (kinda sad... send me an @ if you like it)
                         stack.pop()
                         while x.parent == stack.top().parent:
                             stack.pop()
@@ -446,7 +446,11 @@ def betterEvaluationFunction(currentGameState):
     Your extreme ghost-hunting, pellet-nabbing, food-gobbling, unstoppable
     evaluation function (question 5).
 
-    DESCRIPTION: <write something here so we know what you did>
+    DESCRIPTION: Number of food is bad for the game since it is optimal to eat all food. This
+                 Then, if Pacman is near food is better than far from it. Also if the distance 
+                 between the ghost and Pacman is bigger than the distance between Pacman and
+                 the capsule, Pacman detects a window for eating ghost when they are scared. 
+                 Finally, the radius to chase the ghost is 2 cells a head.
     """
     "*** YOUR CODE HERE ***"
     total_score = -currentGameState.getNumFood()*2
