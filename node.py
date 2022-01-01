@@ -9,9 +9,6 @@ class Node:
         self.value = None
         self.alpha = None
         self.beta = None
-
-    def isMiniMax(self):
-        return self.alpha == None
     
     def isPacman(self):
         return self.agent == 0

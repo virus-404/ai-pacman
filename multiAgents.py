@@ -136,7 +136,7 @@ class MultiAgentSearchAgent(Agent):
     def terminalTest(self, gameState, depth):
         return depth == 0 or gameState.isWin() or gameState.isLose()
 
-class MiniMaxAgent(MultiAgentSearchAgent):
+class MinimaxAgent(MultiAgentSearchAgent):
     """
     Your minimax agent (question 2)
     """
@@ -239,7 +239,7 @@ class AlphaBetaAgent(MultiAgentSearchAgent):
         for a in gameState.getLegalActions(agent):
             v = max(v, self.min_value(gameState=gameState.getNextState(agent, a),
                                       agent=1, depth=depth, alpha=alpha, beta=beta))
-            if v >= beta:
+            if v > beta:
                 return  a if root else v
             if alpha < v:
                 alpha = v
@@ -311,9 +311,9 @@ class ExpectimaxAgent(MultiAgentSearchAgent):
                 v += prob_curr * self.chance(succ, agent=agent + 1, depth=depth)
         return v 
 
-class MinimaxAgent(MultiAgentSearchAgent):
+class MinimaxAgentIter(MultiAgentSearchAgent):
     """
-    Your minimax agent with alpha-beta pruning (question 3)
+    Your minimax agent with alpha-beta pruning (question 3) iterative
     """
 
     def getAction(self, gameState):
@@ -365,7 +365,81 @@ class MinimaxAgent(MultiAgentSearchAgent):
                                             depth=x.depth)
                         x_child.action = a
                         stack.push(x_child)
+
+class AlphaBetaAgentIter(MultiAgentSearchAgent):
+    """
+    Your minimax agent with alpha-beta pruning (question 3) iterative
+    """
+
+    def getAction(self, gameState):
+        """
+        Returns the minimax action using self.depth and self.evaluationFunction
+        """
+        "*** YOUR CODE HERE ***"
+
+        #return random.choice(actions)
+        return self.iter(gameState=gameState,
+                        agent=0,
+                        depth=self.depth)
+
+    def iter(self, gameState: GameState, agent, depth):
+        stack = Stack()
+        n = Node(parent=None, agent=agent, state=gameState, depth=depth)
+        n.alpha = float("-inf")
+        n.beta = float("+inf")
+        stack.push(n)
         
+        while True:
+            x = stack.top()
+            if x.isRoot() and x.value is not None:
+                return x.action
+            if x.value is not None:
+                if x.parent.isPacman():
+                    if  x.value > x.parent.value: #Update my father
+                        x.parent.value = x.value
+                        x.parent.action = x.action
+                    if x.value < x.alpha:         #Kill my brothers *evil laughs* (kinda sat... send me an @ if you like it)
+                        stack.pop()
+                        while x.parent == stack.top().parent:
+                            stack.pop()
+                        stack.push(x)
+                    x.parent.beta = min(x.parent.beta, x.value)
+                   
+                else:
+                    if x.value < x.parent.value:
+                        x.parent.value = x.value
+                    if x.value > x.parent.beta: 
+                        stack.pop()
+                        while x.parent == stack.top().parent:
+                            stack.pop()
+                        stack.push(x)
+                    x.parent.alpha = max(x.parent.alpha, x.value)
+                stack.pop()
+
+            else:
+                if self.terminalTest(x.state, x.depth):
+                    x.value = self.evaluationFunction(x.state)
+                else:
+                    x.value = float("-inf") if x.isPacman() else float("+inf")
+                    for a in x.state.getLegalActions(x.agent):
+                        if x.isPacman():
+                            x_child = Node(parent = x, agent = 1,\
+                                            state = x.state.getNextState(x.agent, a),\
+                                            depth=x.depth)
+                        else:
+                            if x.agent == x.state.getNumAgents() - 1:
+                                x_child = Node(parent = x, agent = 0,\
+                                            state = x.state.getNextState(x.agent, a),\
+                                            depth=x.depth - 1)
+                                
+                            else: 
+                                x_child = Node(parent = x, agent = x.agent + 1,\
+                                            state = x.state.getNextState(x.agent, a),\
+                                            depth=x.depth)
+                        x_child.action = a
+                        x_child.alpha = x.alpha
+                        x_child.beta = x.beta
+                        stack.push(x_child)
 
 def betterEvaluationFunction(currentGameState):
     """
